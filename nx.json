@@ -14,7 +14,13 @@
     "default": {
       "runner": "@nrwl/workspace/tasks-runners/default",
       "options": {
-        "cacheableOperations": ["build", "lint", "test", "e2e"]
+        "cacheableOperations": [
+          "build",
+          "lint",
+          "test",
+          "e2e",
+          "build-storybook"
+        ]
       }
     }
   },
@@ -33,6 +39,13 @@
     "demo-kitchensink-e2e": {
       "tags": [],
       "implicitDependencies": ["demo-kitchensink"]
+    },
+    "shared-ui": {
+      "tags": []
+    },
+    "shared-ui-e2e": {
+      "tags": [],
+      "implicitDependencies": ["shared-ui"]
     }
   }
 }
