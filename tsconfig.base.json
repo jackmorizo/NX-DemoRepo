@@ -10,13 +10,33 @@
     "importHelpers": true,
     "target": "es2015",
     "module": "esnext",
-    "lib": ["es2017", "dom"],
+    "lib": [
+      "es2017",
+      "dom"
+    ],
     "skipLibCheck": true,
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
     "paths": {
-      "@demorepo/shared/ui": ["libs/shared/ui/src/index.ts"]
+      "@demorepo/auth": [
+        "libs/auth/src/index.ts"
+      ],
+      "@demorepo/data-models": [
+        "libs/data-models/src/index.ts"
+      ],
+      "@demorepo/material": [
+        "libs/material/src/index.ts"
+      ],
+      "@demorepo/shared/styles": [
+        "libs/shared/styles/src/index.ts"
+      ],
+      "@demorepo/shared/ui": [
+        "libs/shared/ui/src/index.ts"
+      ]
     }
   },
-  "exclude": ["node_modules", "tmp"]
+  "exclude": [
+    "node_modules",
+    "tmp"
+  ]
 }

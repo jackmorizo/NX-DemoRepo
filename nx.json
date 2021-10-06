@@ -33,12 +33,31 @@
     ]
   },
   "projects": {
+    "auth": {
+      "tags": []
+    },
+    "data-models": {
+      "tags": []
+    },
     "demo-kitchensink": {
       "tags": []
     },
     "demo-kitchensink-e2e": {
       "tags": [],
       "implicitDependencies": ["demo-kitchensink"]
+    },
+    "material": {
+      "tags": []
+    },
+    "material-demo": {
+      "tags": []
+    },
+    "material-demo-e2e": {
+      "tags": [],
+      "implicitDependencies": ["material-demo"]
+    },
+    "shared-styles": {
+      "tags": []
     },
     "shared-ui": {
       "tags": []

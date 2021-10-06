@@ -1,0 +1,27 @@
+<mat-sidenav-container class="sidenav-container">
+    <mat-sidenav #sidenav mode="side" [fixedInViewport]="false" [fixedTopGap]="0" [fixedBottomGap]="0">
+        <button mat-icon-button aria-label="Menu" (click)="sidenav.toggle()">
+            <mat-icon>close</mat-icon>
+        </button>
+
+        <app-navigation></app-navigation>
+
+    </mat-sidenav>
+    <mat-sidenav-content>
+        <mat-toolbar color="primary">
+            <button mat-icon-button class="example-icon" aria-label="Menu" (click)="sidenav.toggle()">
+                <mat-icon>menu</mat-icon>
+            </button>
+            <span>Angular/Material - Playground</span>
+            <span class="flex-spacer"></span>
+            <button mat-icon-button aria-label="Go to the Documentation">
+                <mat-icon>code</mat-icon>
+            </button>
+            <button mat-icon-button aria-label="Search this Site">
+                <mat-icon>search</mat-icon>
+            </button>
+        </mat-toolbar>
+
+        <router-outlet></router-outlet>
+    </mat-sidenav-content>
+</mat-sidenav-container>

@@ -1,6 +1,60 @@
 {
   "version": 1,
   "projects": {
+    "auth": {
+      "projectType": "library",
+      "root": "libs/auth",
+      "sourceRoot": "libs/auth/src",
+      "prefix": "demorepo",
+      "architect": {
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "outputs": [
+            "coverage/libs/auth"
+          ],
+          "options": {
+            "jestConfig": "libs/auth/jest.config.js",
+            "passWithNoTests": true
+          }
+        },
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": [
+              "libs/auth/src/**/*.ts",
+              "libs/auth/src/**/*.html"
+            ]
+          }
+        }
+      }
+    },
+    "data-models": {
+      "projectType": "library",
+      "root": "libs/data-models",
+      "sourceRoot": "libs/data-models/src",
+      "prefix": "demorepo",
+      "architect": {
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "outputs": [
+            "coverage/libs/data-models"
+          ],
+          "options": {
+            "jestConfig": "libs/data-models/jest.config.js",
+            "passWithNoTests": true
+          }
+        },
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": [
+              "libs/data-models/src/**/*.ts",
+              "libs/data-models/src/**/*.html"
+            ]
+          }
+        }
+      }
+    },
     "demo-kitchensink": {
       "projectType": "application",
       "root": "apps/demo-kitchensink",
@@ -9,7 +63,9 @@
       "architect": {
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
-          "outputs": ["{options.outputPath}"],
+          "outputs": [
+            "{options.outputPath}"
+          ],
           "options": {
             "outputPath": "dist/apps/demo-kitchensink",
             "index": "apps/demo-kitchensink/src/index.html",
@@ -21,8 +77,21 @@
               "apps/demo-kitchensink/src/favicon.ico",
               "apps/demo-kitchensink/src/assets"
             ],
-            "styles": ["apps/demo-kitchensink/src/styles.scss"],
-            "scripts": []
+            "styles": [
+              "apps/demo-kitchensink/src/styles.scss",
+              "apps/demo-kitchensink/src/assets/theming.scss"
+            ],
+            "stylePreprocessorOptions": {
+              "includePaths": [
+                "libs/shared/styles/src/lib"
+              ]
+            },
+            "scripts": [
+              "./node_modules/jquery/dist/jquery.js",
+              "./node_modules/popper.js/dist/umd/popper.min.js",
+              "./node_modules/bootstrap/dist/js/bootstrap.bundle.js",
+              "apps/demo-kitchensink/src/assets/kitchensink.js"
+            ]
           },
           "configurations": {
             "production": {
@@ -55,7 +124,7 @@
               "namedChunks": true
             }
           },
-          "defaultConfiguration": "production"
+          "defaultConfiguration": "development"
         },
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
@@ -86,7 +155,9 @@
         },
         "test": {
           "builder": "@nrwl/jest:jest",
-          "outputs": ["coverage/apps/demo-kitchensink"],
+          "outputs": [
+            "coverage/apps/demo-kitchensink"
+          ],
           "options": {
             "jestConfig": "apps/demo-kitchensink/jest.config.js",
             "passWithNoTests": true
@@ -114,9 +185,198 @@
         },
         "lint": {
           "builder": "@nrwl/linter:eslint",
-          "outputs": ["{options.outputFile}"],
+          "outputs": [
+            "{options.outputFile}"
+          ],
           "options": {
-            "lintFilePatterns": ["apps/demo-kitchensink-e2e/**/*.{js,ts}"]
+            "lintFilePatterns": [
+              "apps/demo-kitchensink-e2e/**/*.{js,ts}"
+            ]
+          }
+        }
+      }
+    },
+    "material": {
+      "projectType": "library",
+      "root": "libs/material",
+      "sourceRoot": "libs/material/src",
+      "prefix": "demorepo",
+      "architect": {
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "outputs": [
+            "coverage/libs/material"
+          ],
+          "options": {
+            "jestConfig": "libs/material/jest.config.js",
+            "passWithNoTests": true
+          }
+        },
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": [
+              "libs/material/src/**/*.ts",
+              "libs/material/src/**/*.html"
+            ]
+          }
+        }
+      }
+    },
+    "material-demo": {
+      "projectType": "application",
+      "root": "apps/material-demo",
+      "sourceRoot": "apps/material-demo/src",
+      "prefix": "demorepo",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:browser",
+          "outputs": [
+            "{options.outputPath}"
+          ],
+          "options": {
+            "outputPath": "dist/apps/material-demo",
+            "index": "apps/material-demo/src/index.html",
+            "main": "apps/material-demo/src/main.ts",
+            "polyfills": "apps/material-demo/src/polyfills.ts",
+            "tsConfig": "apps/material-demo/tsconfig.app.json",
+            "inlineStyleLanguage": "scss",
+            "assets": [
+              "apps/material-demo/src/favicon.ico",
+              "apps/material-demo/src/assets"
+            ],
+            "styles": [
+              "./node_modules/@angular/material/_index.scss",
+              "./node_modules/@angular/material/prebuilt-themes/pink-bluegrey.css",
+              "apps/material-demo/src/styles.scss"
+            ],
+            "scripts": []
+          },
+          "configurations": {
+            "production": {
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "500kb",
+                  "maximumError": "1mb"
+                },
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "2kb",
+                  "maximumError": "4kb"
+                }
+              ],
+              "fileReplacements": [
+                {
+                  "replace": "apps/material-demo/src/environments/environment.ts",
+                  "with": "apps/material-demo/src/environments/environment.prod.ts"
+                }
+              ],
+              "outputHashing": "all"
+            },
+            "development": {
+              "buildOptimizer": false,
+              "optimization": false,
+              "vendorChunk": true,
+              "extractLicenses": false,
+              "sourceMap": true,
+              "namedChunks": true
+            }
+          },
+          "defaultConfiguration": "production"
+        },
+        "serve": {
+          "builder": "@angular-devkit/build-angular:dev-server",
+          "configurations": {
+            "production": {
+              "browserTarget": "material-demo:build:production"
+            },
+            "development": {
+              "browserTarget": "material-demo:build:development"
+            }
+          },
+          "defaultConfiguration": "development"
+        },
+        "extract-i18n": {
+          "builder": "@angular-devkit/build-angular:extract-i18n",
+          "options": {
+            "browserTarget": "material-demo:build"
+          }
+        },
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": [
+              "apps/material-demo/src/**/*.ts",
+              "apps/material-demo/src/**/*.html"
+            ]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "outputs": [
+            "coverage/apps/material-demo"
+          ],
+          "options": {
+            "jestConfig": "apps/material-demo/jest.config.js",
+            "passWithNoTests": true
+          }
+        }
+      }
+    },
+    "material-demo-e2e": {
+      "root": "apps/material-demo-e2e",
+      "sourceRoot": "apps/material-demo-e2e/src",
+      "projectType": "application",
+      "architect": {
+        "e2e": {
+          "builder": "@nrwl/cypress:cypress",
+          "options": {
+            "cypressConfig": "apps/material-demo-e2e/cypress.json",
+            "devServerTarget": "material-demo:serve:development"
+          },
+          "configurations": {
+            "production": {
+              "devServerTarget": "material-demo:serve:production"
+            }
+          }
+        },
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "outputs": [
+            "{options.outputFile}"
+          ],
+          "options": {
+            "lintFilePatterns": [
+              "apps/material-demo-e2e/**/*.{js,ts}"
+            ]
+          }
+        }
+      }
+    },
+    "shared-styles": {
+      "projectType": "library",
+      "root": "libs/shared/styles",
+      "sourceRoot": "libs/shared/styles/src",
+      "prefix": "demorepo",
+      "architect": {
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "outputs": [
+            "coverage/libs/shared/styles"
+          ],
+          "options": {
+            "jestConfig": "libs/shared/styles/jest.config.js",
+            "passWithNoTests": true
+          }
+        },
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": [
+              "libs/shared/styles/src/**/*.ts",
+              "libs/shared/styles/src/**/*.html"
+            ]
           }
         }
       }
@@ -129,7 +389,9 @@
       "architect": {
         "test": {
           "builder": "@nrwl/jest:jest",
-          "outputs": ["coverage/libs/shared/ui"],
+          "outputs": [
+            "coverage/libs/shared/ui"
+          ],
           "options": {
             "jestConfig": "libs/shared/ui/jest.config.js",
             "passWithNoTests": true
@@ -149,6 +411,7 @@
           "options": {
             "uiFramework": "@storybook/angular",
             "port": 4400,
+            "projectBuildConfig": "demo-kitchensink",
             "config": {
               "configFolder": "libs/shared/ui/.storybook"
             }
@@ -161,12 +424,20 @@
         },
         "build-storybook": {
           "builder": "@nrwl/storybook:build",
-          "outputs": ["{options.outputPath}"],
+          "outputs": [
+            "{options.outputPath}"
+          ],
           "options": {
             "uiFramework": "@storybook/angular",
             "outputPath": "dist/storybook/shared-ui",
             "config": {
               "configFolder": "libs/shared/ui/.storybook"
+            },
+            "inlineStyleLanguage": "scss",
+            "stylePreprocessorOptions": {
+              "includePaths": [
+                "libs/shared/styles/src/lib"
+              ]
             }
           },
           "configurations": {
@@ -196,9 +467,13 @@
         },
         "lint": {
           "builder": "@nrwl/linter:eslint",
-          "outputs": ["{options.outputFile}"],
+          "outputs": [
+            "{options.outputFile}"
+          ],
           "options": {
-            "lintFilePatterns": ["apps/shared-ui-e2e/**/*.{js,ts}"]
+            "lintFilePatterns": [
+              "apps/shared-ui-e2e/**/*.{js,ts}"
+            ]
           }
         }
       }
